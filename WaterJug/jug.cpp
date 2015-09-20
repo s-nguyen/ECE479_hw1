@@ -67,22 +67,22 @@ void jug::jugop(int o) {
 	switch (o) {
 	case 0: //Fill the A-gallon jug
 		setJugA(jugACap);
-		cout << ">Fill the "<<jugACap<<"-gallon jug" << "\t\t--- state:("
+		cout << ">Fill the "<<jugACap<<"-gal jug" << "\t\t\t\t\t--- state:("
 			<< jugA << ", " << jugB << ")" << endl;
 		break;
 	case 1: //Fill the B-gallon jug
 		setJugB(jugBCap);
-		cout << ">Fill the "<<jugBCap<<"-gal jug" << "\t\t--- state:("
+		cout << ">Fill the "<<jugBCap<<"-gal jug" << "\t\t\t\t\t--- state:("
 			<< jugA << ", " << jugB << ")" << endl;
 		break;
 	case 2: //Empty  the A-gallon jug
 		setJugA(0);
-		cout << ">Empty the "<<jugACap<<"-gal jug" << "\t\t--- state:("
+		cout << ">Empty the "<<jugACap<<"-gal jug" << "\t\t\t\t\t--- state:("
 			<< jugA << ", " << jugB << ")" << endl;
 		break;
 	case 3: //Empty the B-gallon jug
 		setJugB(0);
-		cout << ">Empty the "<<jugBCap<<"-gal jug" << "\t\t--- state:("
+		cout << ">Empty the "<<jugBCap<<"-gal jug" << "\t\t\t\t\t--- state:("
 			<< jugA << ", " << jugB << ")" << endl;
 		break;
 	case 4: //Pour B-gallon jug into A-gallon jug keep overflow
@@ -90,7 +90,7 @@ void jug::jugop(int o) {
 			jugA++;
 			jugB--;
 		}
-		cout << ">Pour "<<jugBCap<<"-gal jug into "<<jugACap<<"-gal jug" << "\t\t--- state:("
+		cout << ">Pour "<<jugBCap<<"-gal jug into "<<jugACap<<"-gal jug" << "\t\t\t\t--- state:("
 			<< jugA << ", " << jugB << ")" << endl;
 		break;
 	case 5: //Pour jugACap-gallon jug into B-gallon jug keep overflow
@@ -98,7 +98,7 @@ void jug::jugop(int o) {
 			jugA--;
 			jugB++;
 		}
-		cout << ">Pour "<<jugACap<<"-gal jug into "<<jugBCap<<"-gal jug" << "\t\t--- state:("
+		cout << ">Pour "<<jugACap<<"-gal jug into "<<jugBCap<<"-gal jug" << "\t\t\t\t--- state:("
 			<< jugA << ", " << jugB << ")" << endl;
 		break;
 	}
