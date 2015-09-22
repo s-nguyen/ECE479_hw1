@@ -7,9 +7,11 @@ private:
 	int jugA;
 	int jugB;
 	int goal [2];
+	jug* node = 0;
 
 public:
 	jug();
+	jug(int ac, int bc, int a, int b);
 	~jug();
 	void setJugA(int i);
 	void setJugB(int i);
@@ -22,9 +24,10 @@ public:
 	int getJugACap();
 	int getJugBCap();
 
+	void expand();
 
 
-	void jugop(int o);
+	int jugop(int o);
 
 };
 
