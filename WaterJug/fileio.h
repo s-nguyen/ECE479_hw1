@@ -9,7 +9,7 @@
 using namespace std;
 
 
-void readfile(string file, jug* j);
+int readfile(string file, jug* j);
 
 
 

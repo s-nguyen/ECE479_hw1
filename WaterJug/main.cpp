@@ -12,9 +12,20 @@ void main(int argc, char *argv[]) {
 	cout << "Please enter input file: ";
 	cin >> file;
 	
-	readfile(file, j);
+	int err = readfile(file, j);
 
-	stratA(j);
+
+	if (err == 1) {
+		cout << "Goal is higher than capacity" << endl;
+	}
+	else if (err == -2) {
+		cout << "File does not exist" << endl;
+	}
+	else {
+		stratA(j);
+		stratB(j);
+	}
+	
 
 	
 }

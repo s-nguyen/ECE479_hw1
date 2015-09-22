@@ -13,14 +13,16 @@ jug::jug()
 	goal[0] = 0;
 	goal[1] = 0;
 
+
 }
 
-jug::jug(int ac, int bc, int a, int b ) {
+jug::jug(int ac, int bc, int a, int b, int g[2] ) {
 	jugACap = ac;
-	jugBCap - bc;
+	jugBCap = bc;
 	jugA = a;
 	jugB = b;
-
+	goal[0] = g[0];
+	goal[1] = g[1];
 }
 
 
@@ -72,25 +74,86 @@ int jug::getJugBCap() {
 	return jugBCap;
 }
 
+void jug::text(int o, int r) {
+	switch (o) {
+	case 0:
+		if (r == 0) {
+			setJugA(jugACap);
+		}
+		else if (r == 1) {
+			cout << ">Fill the " << jugACap << "-gal jug" << "\t\t\t\t\t--- state:("
+				<< jugA << ", " << jugB << ")" << endl;
+		}
+		break;
+	case 1:
+		if (r == 0) {
+			setJugB(jugBCap);
+		}
+		else if (r == 1) {
+			cout << ">Fill the " << jugBCap << "-gal jug" << "\t\t\t\t\t--- state:("
+				<< jugA << ", " << jugB << ")" << endl;
+		}
+		break;
+	case 2:
+		if (r == 0) {
+			setJugA(0);
+		}
+		else if (r == 1) {
+			cout << ">Empty the " << jugACap << "-gal jug" << "\t\t\t\t\t--- state:("
+				<< jugA << ", " << jugB << ")" << endl;
+		}
+		break;
+	case 3:
+		if (r == 0) {
+			setJugB(0);
+		}
+		else if (r == 1) {
+			cout << ">Empty the " << jugBCap << "-gal jug" << "\t\t\t\t\t--- state:("
+				<< jugA << ", " << jugB << ")" << endl;
+		}
+		break;
+	case 4:
+		if (r == 0) {
+			while (jugA < jugACap && jugB > 0) {
+				jugA++;
+				jugB--;
+			}
+		}
+		else if (r == 1) {
+			cout << ">Pour " << jugBCap << "-gal jug into " << jugACap << "-gal jug" << "\t\t\t\t--- state:("
+				<< jugA << ", " << jugB << ")" << endl;
+		}
+		break;
+	case 5:
+		if (r == 0) {
+			while (jugA > 0 && jugB < jugBCap) {
+				jugA--;
+				jugB++;
+			}
+		}
+		else if (r == 1) {
+			cout << ">Pour " << jugACap << "-gal jug into " << jugBCap << "-gal jug" << "\t\t\t\t--- state:("
+				<< jugA << ", " << jugB << ")" << endl;
+		}
+		break;
+	}
+}
 
 int jug::jugop(int o) {
 	switch (o) {
 	case 0: //Fill the A-gallon jug
 		if (jugA != jugACap) {
 			setJugA(jugACap);
-			cout << ">Fill the " << jugACap << "-gal jug" << "\t\t\t\t\t--- state:("
-				<< jugA << ", " << jugB << ")" << endl;
+			return 0;
 		}
 		else {
 			return -1;
 		}
-		
 		break;
 	case 1: //Fill the B-gallon jug
 		if (jugB != jugBCap) {
 			setJugB(jugBCap);
-			cout << ">Fill the " << jugBCap << "-gal jug" << "\t\t\t\t\t--- state:("
-				<< jugA << ", " << jugB << ")" << endl;
+			return 1;
 		}
 		else {
 			return -1;
@@ -99,8 +162,7 @@ int jug::jugop(int o) {
 	case 2: //Empty  the A-gallon jug
 		if (jugA != 0) {
 			setJugA(0);
-			cout << ">Empty the " << jugACap << "-gal jug" << "\t\t\t\t\t--- state:("
-				<< jugA << ", " << jugB << ")" << endl;
+			return 2;
 		}
 		else {
 			return -1;
@@ -109,8 +171,7 @@ int jug::jugop(int o) {
 	case 3: //Empty the B-gallon jug
 		if (jugB != 0) {
 			setJugB(0);
-			cout << ">Empty the " << jugBCap << "-gal jug" << "\t\t\t\t\t--- state:("
-				<< jugA << ", " << jugB << ")" << endl;
+			return 3;
 		}
 		else {
 			return -1;
@@ -122,8 +183,7 @@ int jug::jugop(int o) {
 				jugA++;
 				jugB--;
 			}
-			cout << ">Pour " << jugBCap << "-gal jug into " << jugACap << "-gal jug" << "\t\t\t\t--- state:("
-				<< jugA << ", " << jugB << ")" << endl;
+			return 4;
 		}
 		else {
 			return -1;
@@ -135,20 +195,24 @@ int jug::jugop(int o) {
 				jugA--;
 				jugB++;
 			}
-			cout << ">Pour " << jugACap << "-gal jug into " << jugBCap << "-gal jug" << "\t\t\t\t--- state:("
-				<< jugA << ", " << jugB << ")" << endl;
+			return 5;
 		}
 		else {
 			return -1;
 		}
 		break;
 	}
-	return 0;
+
 }
 
-void jug::expand() {
+void jug::expand() { //expand all possibile posibilities
 	for (int i = 0; i < 6; i++) {
-		jug* temp = new jug(this->getJugACap(), this->getJugBCap(), this->getJugA(), this->getJugB());
-		this->node = temp;
+		jug temp(this->getJugACap(), this->getJugBCap(), this->getJugA(), this->getJugB(), this->getGoal());
+		temp.text(i, 0);
+		this->node.push_back(temp);
 	}
+}
+
+vector<jug> jug::getNode() {
+	return node;
 }
