@@ -6,7 +6,7 @@
 #include <sstream>
 #include "jug.h"
 
-using namespace std;
+
 
 
 int readfile(string file, jug* j);

@@ -6,7 +6,7 @@
 #include "CS.h"
 using namespace std;
 
-void main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
 	string file;
 	jug* j = new jug();
 	cout << "Please enter input file: ";
@@ -27,5 +27,5 @@ void main(int argc, char *argv[]) {
 	}
 	
 
-	
+	return 0;
 }

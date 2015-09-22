@@ -12,7 +12,7 @@ jug::jug()
 	jugB = 0;
 	goal[0] = 0;
 	goal[1] = 0;
-
+	op = 0;
 
 }
 

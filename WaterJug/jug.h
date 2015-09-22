@@ -13,7 +13,7 @@ private:
 	int goal [2];
 	//jug* node[6];
 	vector<jug> node;
-	int op = 0;
+	int op;
 public:
 	jug();
 	jug(int ac, int bc, int a, int b, int g[2]);

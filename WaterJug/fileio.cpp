@@ -1,11 +1,13 @@
 #include "fileio.h"
 
+using namespace std;
+
 int readfile(string file, jug* j) {
 
 	string stuff = "";
-	ifstream a_file;
+	ifstream a_file(file.c_str());
 	int temp;
-	a_file.open(file);
+
 
 	if (a_file) {
 		getline(a_file, stuff, ':');
