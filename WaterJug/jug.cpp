@@ -1,6 +1,6 @@
 #include "jug.h"
 #include <iostream>
-
+#include <fstream>
 using namespace std;
 
 
@@ -74,7 +74,7 @@ int jug::getJugBCap() {
 	return jugBCap;
 }
 
-void jug::text(int o, int r) {
+void jug::text(int o, int r, ofstream& o_file) {
 	switch (o) {
 	case 0:
 		if (r == 0) {
@@ -82,6 +82,8 @@ void jug::text(int o, int r) {
 		}
 		else if (r == 1) {
 			cout << ">Fill the " << jugACap << "-gal jug" << "\t\t\t\t\t--- state:("
+				<< jugA << ", " << jugB << ")" << endl;
+			o_file << ">Fill the " << jugACap << "-gal jug" << "\t\t\t\t\t--- state:("
 				<< jugA << ", " << jugB << ")" << endl;
 		}
 		break;
@@ -92,6 +94,8 @@ void jug::text(int o, int r) {
 		else if (r == 1) {
 			cout << ">Fill the " << jugBCap << "-gal jug" << "\t\t\t\t\t--- state:("
 				<< jugA << ", " << jugB << ")" << endl;
+			o_file << ">Fill the " << jugBCap << "-gal jug" << "\t\t\t\t\t--- state:("
+				<< jugA << ", " << jugB << ")" << endl;
 		}
 		break;
 	case 2:
@@ -101,6 +105,8 @@ void jug::text(int o, int r) {
 		else if (r == 1) {
 			cout << ">Empty the " << jugACap << "-gal jug" << "\t\t\t\t\t--- state:("
 				<< jugA << ", " << jugB << ")" << endl;
+			o_file << ">Empty the " << jugACap << "-gal jug" << "\t\t\t\t\t--- state:("
+				<< jugA << ", " << jugB << ")" << endl;
 		}
 		break;
 	case 3:
@@ -109,6 +115,8 @@ void jug::text(int o, int r) {
 		}
 		else if (r == 1) {
 			cout << ">Empty the " << jugBCap << "-gal jug" << "\t\t\t\t\t--- state:("
+				<< jugA << ", " << jugB << ")" << endl;
+			o_file << ">Empty the " << jugBCap << "-gal jug" << "\t\t\t\t\t--- state:("
 				<< jugA << ", " << jugB << ")" << endl;
 		}
 		break;
@@ -122,6 +130,8 @@ void jug::text(int o, int r) {
 		else if (r == 1) {
 			cout << ">Pour " << jugBCap << "-gal jug into " << jugACap << "-gal jug" << "\t\t\t\t--- state:("
 				<< jugA << ", " << jugB << ")" << endl;
+			o_file << ">Pour " << jugBCap << "-gal jug into " << jugACap << "-gal jug" << "\t\t\t\t--- state:("
+				<< jugA << ", " << jugB << ")" << endl;
 		}
 		break;
 	case 5:
@@ -133,6 +143,8 @@ void jug::text(int o, int r) {
 		}
 		else if (r == 1) {
 			cout << ">Pour " << jugACap << "-gal jug into " << jugBCap << "-gal jug" << "\t\t\t\t--- state:("
+				<< jugA << ", " << jugB << ")" << endl;
+			o_file << ">Pour " << jugACap << "-gal jug into " << jugBCap << "-gal jug" << "\t\t\t\t--- state:("
 				<< jugA << ", " << jugB << ")" << endl;
 		}
 		break;
@@ -205,10 +217,10 @@ int jug::jugop(int o) {
 
 }
 
-void jug::expand() { //expand all possibile posibilities
+void jug::expand(ofstream& o_file) { //expand all possibile posibilities
 	for (int i = 0; i < 6; i++) {
 		jug temp(this->getJugACap(), this->getJugBCap(), this->getJugA(), this->getJugB(), this->getGoal());
-		temp.text(i, 0);
+		temp.text(i, 0, o_file);
 		this->node.push_back(temp);
 	}
 }

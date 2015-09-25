@@ -2,10 +2,10 @@
 
 using namespace std;
 
-int readfile(string file, jug* j) {
+int readfile(char* file, jug* j) {
 
 	string stuff = "";
-	ifstream a_file(file.c_str());
+	ifstream a_file(file);
 	int temp;
 
 
@@ -58,3 +58,4 @@ int readfile(string file, jug* j) {
 
 	
 }
+

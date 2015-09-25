@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-
+#include <fstream>
 using namespace std;
 
 class jug
@@ -29,9 +29,9 @@ public:
 	int getJugACap();
 	int getJugBCap();
 	vector<jug> getNode();
-	void text(int o, int r);
+	void text(int o, int r, ofstream& o_file);
 
-	void expand();
+	void expand(ofstream& o_file);
 
 
 	int jugop(int o);

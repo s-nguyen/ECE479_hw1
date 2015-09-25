@@ -9,7 +9,7 @@
 
 
 
-int readfile(string file, jug* j);
+int readfile(char* file, jug* j);
 
 
 
